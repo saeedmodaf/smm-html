@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>منصة الشكاوى والاقتراحات - جامعة بيشة</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f6f6;
+        }
+        
+        header {
+            background-color: #200c94;
+            color: #fff;
+            padding: 15px 20px;
+            text-align: center;
+        }
+
+        header img {
+            max-width: 100px;
+            display: block;
+            margin: 0 auto 10px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        nav {
+            background-color: #0300b3;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+
+        nav a:hover {
+            background-color: #22598e;
+            border-radius: 4px;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 2px 4px rgba(30, 5, 174, 0.951);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        form input, form select, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        form button {
+            background-color: #002147;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .status-box {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .status-box p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #262ed4;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>منصة الشكاوى والاقتراحات</h1>
+    </header>
+    <nav>
+        <a href="#" onclick="showPage('home')">الرئيسية</a>
+        <a href="#" onclick="showPage('submit')">تقديم شكوى/اقتراح</a>
+        <a href="#" onclick="showPage('track')">متابعة الشكاوى</a>
+        <a href="#" onclick="showPage('adminLogin')">تسجيل دخول المدير</a>
+    </nav>
+    <main>
+        <!-- الصفحة الرئيسية -->
+        <section id="home">
+            <h2>مرحبًا بكم في منصة الشكاوى والاقتراحات</h2>
+            <p>منصة الشكاوى والاقتراحات هي أداة مبتكرة تهدف إلى تعزيز التواصل بين الأفراد والجهات المعنية، مما يتيح للجميع فرصة التعبير عن آرائهم وملاحظاتهم بسهولة وشفافية. تسهم المنصة في تحسين الخدمات وتطوير الأداء من خلال الاستماع المباشر لاحتياجات المستخدمين ومقترحاتهم البناءة. إنها خطوة فعّالة نحو بناء بيئة تفاعلية تُعزز الثقة والمسؤولية المجتمعية.</p>
+            <h2>اقسام الواجهات:</h2>
+            <h3>١.الواجهةالرئيسة.</h3>
+            <h3>٢.واجهة تقديم الشكاوا والاقتراحات.</h3>
+            <h3>٣.واجهة متابعة الشكاوا والاقتراحات</h3>
+            
+        </section>
+
+        <!-- صفحة تقديم شكوى/اقتراح -->
+        <section id="submit" class="hidden">
+            <form onsubmit="submitComplaint(event)">
+                <label for="name">الاسم:</label>
+                <input type="text" id="name" name="name" placeholder="أدخل اسمك" required>
+
+                <label for="studentId">الرقم الجامعي:</label>
+                <input type="text" id="studentId" name="studentId" placeholder="أدخل رقمك الجامعي" required>
+
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" placeholde="أدخل بريدك الإلكتروني" required>
+
+                <label for="type">نوع الرسالة:</label>
+                <select id="type" name="type" required>
+                    <option value="complaint">شكوى</option>
+                    <option value="suggestion">اقتراح</option>
+                </select>
+
+                <label for="message">الرسالة:</label>
+                <textarea id="message" name="message" rows="5" placeholder="أدخل رسالتك هنا" required></textarea>
+
+                <button type="submit">إرسال</button>
+            </form>
+        </section>
+
+        <!-- صفحة متابعة الشكاوى -->
+        <section id="track" class="hidden">
+            <form onsubmit="trackComplaint(event)">
+                <label for="complaintId">رقم الشكوى:</label>
+                <input type="text" id="complaintId" name="complaintId" placeholder="أدخل رقم الشكوى" required>
+                
+                <label for="studentIdTrack">الرقم الجامعي:</label>
+                <input type="text" id="studentIdTrack" name="studentIdTrack" placeholder="أدخل الرقم الجامعي" required>
+
+                <button type="submit">متابعة</button>
+            </form>
+
+            <div id="complaintStatus" class="hidden"></div>
+        </section>
+
+        <!-- صفحة تسجيل دخول مدير النظام -->
+        <section id="adminLogin" class="hidden">
+            <form onsubmit="adminLogin(event)">
+                <label for="adminUsername">اسم المستخدم:</label>
+                <input type="text" id="adminUsername" placeholder="أدخل اسم المستخدم" required>
+
+                <label for="adminPassword">كلمة المرور:</label>
+                <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور" required>
+
+                <button type="submit">تسجيل دخول كمدير</button>
+            </form>
+        </section>
+
+        <!-- لوحة تحكم مدير النظام -->
+        <section id="adminPanel" class="hidden">
+            <h2>لوحة تحكم مدير النظام</h2>
+            <div id="complaintList"></div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 جامعة بيشة - جميع الحقوق محفوظة
+    </footer>
+
+    <script>
+        let complaints = []; // مصفوفة لتخزين الشكاوى
+        let currentComplaintId = 1001; // لتوليد أرقام الشكاوى بشكل عشوائي
+
+        // التنقل بين الصفحات
+        function showPage(pageId) {
+            console.log("عرض الصفحة: " + pageId);  // إضافة هذا السطر للتحقق
+            const sections = document.querySelectorAll("main section");
+            sections.forEach(section => section.classList.add("hidden"));
+            document.getElementById(pageId).classList.remove("hidden");
+        }
+
+        // تسجيل دخول مدير النظام
+        function adminLogin(event) {
+            event.preventDefault();
+            const adminUsername = document.getElementById("adminUsername").value;
+            const adminPassword = document.getElementById("adminPassword").value;
+
+            if (adminUsername === "M" && adminPassword === "1234") {
+                alert("تم تسجيل الدخول بنجاح كمدير.");
+                showPage('adminPanel');
+                displayComplaints();
+            } else {
+                alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
+            }
+        }
+
+        // إرسال الشكوى
+        function submitComplaint(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const studentId = document.getElementById("studentId").value;
+            const email = document.getElementById("email").value;
+            const type = document.getElementById("type").value;
+            const message = document.getElementById("message").value;
+
+            // توليد رقم الشكوى بشكل عشوائي
+            const complaintId = currentComplaintId++;
+
+            const complaint = {
+                id: complaintId,
+                name: name,
+                studentId: studentId,
+                email: email,
+                type: type,
+                message: message,
+                status: "تم استلام الشكوى",
+                response: "" // خاصية الرد التي ستكون فارغة في البداية
+            };
+
+            // إضافة الشكوى إلى المصفوفة
+            complaints.push(complaint);
+            alert(`تم إرسال الشكوى بنجاح. رقم الشكوى هو: ${complaintId}`);
+            showPage('home');
+        }
+
+        // متابعة الشكوى
+        function trackComplaint(event) {
+            event.preventDefault();
+            const complaintId = document.getElementById("complaintId").value;
+            const studentIdTrack = document.getElementById("studentIdTrack").value;
+
+            // البحث عن الشكوى
+            const complaint = complaints.find(c => c.id == complaintId && c.studentId == studentIdTrack);
+
+            const complaintStatusDiv = document.getElementById("complaintStatus");
+            complaintStatusDiv.classList.remove("hidden");
+
+            if (complaint) {
+                // عرض حالة الشكوى و الرد
+                complaintStatusDiv.innerHTML = `
+                    <p><strong>رقم الشكوى:</strong> ${complaint.id}</p>
+                    <p><strong>الاسم:</strong> ${complaint.name}</p>
+                    <p><strong>الرقم الجامعي:</strong> ${complaint.studentId}</p>
+                    <p><strong>البريد الإلكتروني:</strong> ${complaint.email}</p>
+                    <p><strong>نوع الشكوى:</strong> ${complaint.type}</p>
+                    <p><strong>الرسالة:</strong> ${complaint.message}</p>
+                    <p><strong>حالة الشكوى:</strong> ${complaint.status}</p>
+                    <p><strong>الرد:</strong> ${complaint.response ? complaint.response : "لا يوجد رد بعد."}</p>
+                `;
+            } else {
+                complaintStatusDiv.innerHTML = "<p>الشكوى غير موجودة أو الرقم الجامعي غير صحيح.</p>";
+            }
+        }
+
+        // عرض الشكاوى في لوحة تحكم مدير النظام
+        function displayComplaints() {
+            const complaintList = document.getElementById("complaintList");
+            complaintList.innerHTML = ''; // مسح المحتوى السابق
+
+            if (complaints.length === 0) {
+                complaintList.innerHTML = '<p>لا توجد شكاوى حالياً.</p>';
+                return;
+            }
+
+            complaints.forEach(complaint => {
+                const complaintElement = document.createElement("div");
+                complaintElement.classList.add("status-box");
+
+                complaintElement.innerHTML = `
+                    <p><strong>رقم الشكوى:</strong> ${complaint.id}</p>
+                    <p><strong>الاسم:</strong> ${complaint.name}</p>
+                    <p><strong>الرقم الجامعي:</strong> ${complaint.studentId}</p>
+                    <p><strong>البريد الإلكتروني:</strong> ${complaint.email}</p>
+                    <p><strong>نوع الشكوى:</strong> ${complaint.type}</p>
+                    <p><strong>الرسالة:</strong> ${complaint.message}</p>
+                    <p><strong>حالة الشكوى:</strong> ${complaint.status}</p>
+                    <textarea placeholder="رد مدير النظام هنا..." rows="4" id="response-${complaint.id}"></textarea>
+                    <button onclick="respondToComplaint(${complaint.id})">إرسال الرد</button>
+                `;
+
+                complaintList.appendChild(complaintElement);
+            });
+        }
+
+        // رد مدير النظام على الشكوى
+        function respondToComplaint(complaintId) {
+            const response = document.getElementById(`response-${complaintId}`).value;
+
+            // تحديث الرد في الشكوى
+            const complaint = complaints.find(c => c.id === complaintId);
+            if (complaint) {
+                complaint.response = response; // حفظ الرد
+                complaint.status = "تم الرد على الشكوى"; // تغيير الحالة إلى تم الرد
+                alert(`تم إرسال الرد: ${response}`);
+                displayComplaints(); // تحديث عرض الشكاوى
+            }
+        }
+    </script>
+</body>
+</html>
